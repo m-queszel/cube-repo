@@ -1,0 +1,16 @@
+{
+    "java.project.sourcePaths": [
+        "."
+    ],
+    "java.project.referencedLibraries": [],
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.jdt.ls.java.home": "C:\\Program Files\\Java\\jdk-23",  // Path to your JDK 23 installation
+    "java.sourceCompatibility": "23",                // Set source compatibility to 23
+    "java.run.jvmArgs": [
+        "--enable-preview"                            // Enable preview features at runtime
+    ],
+    "java.compile.jvmArgs": [
+        "--enable-preview"                            // Enable preview features during compilation
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"  // Automatically update build configuration
+}
