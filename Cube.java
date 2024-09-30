@@ -10,6 +10,14 @@ public class Cube{
         faces [5] = new Face ('y');
     }
 
+    public void printState() {
+        System.out.println("Yellow Face: " + this.getYellowFace());
+        System.out.println("Red Face: " + this.getRedFace());
+        System.out.println("Green Face: " + this.getGreenFace());
+        System.out.println("Orange Face: " + this.getOrangeFace());
+        System.out.println("White Face: " + this.getWhiteFace());
+    }
+
     public Face getFace(int index){
         return faces[index];
     }
@@ -37,5 +45,4 @@ public class Cube{
     public Face getYellowFace(){
         return faces[5];
     }
-
 }

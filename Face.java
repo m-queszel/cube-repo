@@ -20,6 +20,7 @@ public class Face {
         corners.put(7, "" + centerIn + 7);
         corners.put(8, "" + centerIn + 8);
     }
+    
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
