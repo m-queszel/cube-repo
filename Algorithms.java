@@ -43,36 +43,28 @@ public class Algorithms {
         face.corners.put(7, tempCorner8);
         face.corners.put(8, tempCorner5);
     }
-    //This method rotates a slice either in the normal or prime direction
-    public static void rotateSlice(Face topFace, Face frontFace, Face bottomFace, Face backFace, int edgeIndex, int topCornerIndex, int bottomCornerIndex, boolean isPrimeRotation){
+    //This method rotates a slice either in the normal or prime vertical direction
+    public static void rotateVerticalSlice(Face topFace, Face frontFace, Face bottomFace, Face backFace, int edgeIndex, int topCornerIndex, int bottomCornerIndex, boolean isPrimeRotation){
         //Copy and storage of all the manipulated faces occurs here
         String tempEdgeTop = topFace.edges.get(edgeIndex);
         String tempEdgeFront = frontFace.edges.get(edgeIndex);
         String tempEdgeBottom = bottomFace.edges.get(edgeIndex);
-        String tempEdgeBack = backFace.edges.get(edgeIndex + 2);
-
         String tempCornerTopTop = topFace.corners.get(topCornerIndex);
         String tempCornerTopBottom = topFace.corners.get(bottomCornerIndex);
-
         String tempCornerFrontTop = frontFace.corners.get(topCornerIndex);
         String tempCornerFrontBottom = frontFace.corners.get(bottomCornerIndex);
-
         String tempCornerBottomTop = bottomFace.corners.get(topCornerIndex);
         String tempCornerBottomBottom = bottomFace.corners.get(bottomCornerIndex);
 
-        String tempCornerBackTop = backFace.corners.get(topCornerIndex + 2);
-        String tempCornerBackBottom = backFace.corners.get(bottomCornerIndex + 2);
-
         //Actual rotation of the slice
-        if(isPrimeRotation){
-            
+        if(isPrimeRotation){  
             topFace.edges.put(edgeIndex, backFace.edges.get(edgeIndex + 2));
             frontFace.edges.put(edgeIndex, tempEdgeTop);
             bottomFace.edges.put(edgeIndex, tempEdgeFront);
             backFace.edges.put(edgeIndex + 2, tempEdgeBottom);
 
-            topFace.corners.put(topCornerIndex, tempCornerBackTop);
-            topFace.corners.put(bottomCornerIndex, tempCornerBackBottom);
+            topFace.corners.put(topCornerIndex, backFace.corners.get(topCornerIndex + 2));
+            topFace.corners.put(bottomCornerIndex, backFace.corners.get(bottomCornerIndex + 2));
 
             frontFace.corners.put(topCornerIndex, tempCornerTopTop);
             frontFace.corners.put(bottomCornerIndex, tempCornerTopBottom);
@@ -80,32 +72,76 @@ public class Algorithms {
             bottomFace.corners.put(topCornerIndex, tempCornerFrontTop);
             bottomFace.corners.put(bottomCornerIndex, tempCornerFrontBottom);
 
-            backFace.corners.put(topCornerIndex + 2, tempCornerBottomTop);
-            backFace.corners.put(bottomCornerIndex + 2, tempCornerBottomTop);
+            backFace.corners.put(bottomCornerIndex + 2, tempCornerBottomBottom);
+            backFace.corners.put(topCornerIndex + 2,tempCornerBottomTop);
 
         }
         else{
-
-            topFace.edges.put(edgeIndex, tempEdgeFront);
-            frontFace.edges.put(edgeIndex, tempEdgeBottom);
+            topFace.edges.put(edgeIndex, frontFace.edges.get(edgeIndex));
+            frontFace.edges.put(edgeIndex, bottomFace.edges.get(edgeIndex));
             bottomFace.edges.put(edgeIndex, backFace.edges.get(edgeIndex + 2));
             backFace.edges.put(edgeIndex + 2, tempEdgeTop);
+        
 
-            topFace.corners.put(topCornerIndex, tempCornerFrontTop);
-            topFace.corners.put(bottomCornerIndex, tempCornerFrontBottom);
-
-            frontFace.corners.put(topCornerIndex, tempCornerBottomTop);
-            frontFace.corners.put(bottomCornerIndex, tempCornerBottomBottom);
-
-            bottomFace.corners.put(topCornerIndex, tempCornerBackTop);
-            bottomFace.corners.put(bottomCornerIndex, tempCornerBackBottom);
-
+            topFace.corners.put(topCornerIndex, frontFace.corners.get(topCornerIndex));
+            topFace.corners.put(bottomCornerIndex, frontFace.corners.get(bottomCornerIndex));
+        
+            frontFace.corners.put(topCornerIndex, bottomFace.corners.get(topCornerIndex));
+            frontFace.corners.put(bottomCornerIndex, bottomFace.corners.get(bottomCornerIndex));
+        
+            bottomFace.corners.put(topCornerIndex, backFace.corners.get(topCornerIndex + 2));
+            bottomFace.corners.put(bottomCornerIndex, backFace.corners.get(bottomCornerIndex + 2));
+        
             backFace.corners.put(topCornerIndex + 2, tempCornerTopTop);
             backFace.corners.put(bottomCornerIndex + 2, tempCornerTopBottom);
-
         }
     }
-
+    //This method rotates a slice either in the normal or prime horizontal direction
+    public static void rotateHorizontalSlice(Face leftFace, Face rightFace, Face backFace, Face frontFace, int edgeIndex, int topRightCornerIndex, int topLeftCornerIndex, boolean isPrimeRotation){
+        //Store all corners and edges into temporary varaibles
+        String tempEdgeFront = frontFace.edges.get(edgeIndex);
+        String tempEdgeLeft = leftFace.edges.get(edgeIndex);
+        String tempEdgeBack = backFace.edges.get(edgeIndex);
+        String tempEdgeRight = rightFace.edges.get(edgeIndex);
+        String tempCornerFrontTopRight = frontFace.corners.get(topRightCornerIndex);
+        String tempCornerFrontTopLeft = frontFace.corners.get(topLeftCornerIndex);
+        String tempCornerLeftTopRight = leftFace.corners.get(topRightCornerIndex);
+        String tempCornerLeftTopleft = leftFace.corners.get(topLeftCornerIndex);
+        String tempCornerRightTopRight = rightFace.corners.get(topRightCornerIndex);
+        String tempCornerRightTopLeft = rightFace.corners.get(topLeftCornerIndex);
+        String tempCornerBackTopRight = backFace.corners.get(topRightCornerIndex);
+        String tempCornerBackTopleft = backFace.corners.get(topLeftCornerIndex);
+        //Rotation counter-clockwise
+        if(isPrimeRotation){
+            frontFace.edges.put(edgeIndex, leftFace.edges.get(edgeIndex));
+            rightFace.edges.put(edgeIndex, tempEdgeFront);
+            backFace.edges.put(edgeIndex, tempEdgeRight);
+            leftFace.edges.put(edgeIndex, tempEdgeBack);
+            frontFace.corners.put(topRightCornerIndex, tempCornerLeftTopRight);
+            frontFace.corners.put(topLeftCornerIndex,  tempCornerLeftTopleft);
+            rightFace.corners.put(topRightCornerIndex, tempCornerFrontTopRight);
+            rightFace.corners.put(topLeftCornerIndex, tempCornerFrontTopLeft);
+            backFace.corners.put(topRightCornerIndex, tempCornerRightTopRight);
+            backFace.corners.put(topLeftCornerIndex, tempCornerRightTopLeft);
+            leftFace.corners.put(topRightCornerIndex, tempCornerBackTopRight);
+            leftFace.corners.put(topLeftCornerIndex, tempCornerBackTopleft);
+        }
+        //Rotation clockwise
+        else{
+            leftFace.edges.put(edgeIndex, frontFace.edges.get(edgeIndex));
+            backFace.edges.put(edgeIndex, tempEdgeLeft);
+            rightFace.edges.put(edgeIndex, tempEdgeBack);
+            frontFace.edges.put(edgeIndex, tempEdgeRight);
+            frontFace.corners.put(topRightCornerIndex, tempCornerRightTopRight);
+            frontFace.corners.put(topLeftCornerIndex, tempCornerRightTopLeft);
+            leftFace.corners.put(topRightCornerIndex, tempCornerFrontTopRight);
+            leftFace.corners.put(topLeftCornerIndex, tempCornerFrontTopLeft);
+            backFace.corners.put(topRightCornerIndex, tempCornerLeftTopRight);
+            backFace.corners.put(topLeftCornerIndex, tempCornerLeftTopleft);
+            rightFace.corners.put(topRightCornerIndex, tempCornerBackTopRight);
+            rightFace.corners.put(topLeftCornerIndex, tempCornerBackTopleft);
+        }
+    }
     //This method performs an R movement.
     public static void normalR(Cube cube){
         //Not necessary, but I am assigning variables here to better visualize what's happening.
@@ -119,10 +155,11 @@ public class Algorithms {
         //First, we rotate then face
         rotateFaceClockwise(rightFace);
         //Call rotateSlice method to rotate the whole slice
-        rotateSlice(topFace, frontFace, bottomFace, backFace, 2, 5, 6, isPrime);
+        rotateVerticalSlice(topFace, frontFace, bottomFace, backFace, 2, 5, 6, isPrime);
     }
     //This method performs an R' movement
     public static void primeR(Cube cube){
+        
         //Not necessary, but I am assigning variables here to better visualize what's happening.
         Face rightFace = cube.getGreenFace();
         Face topFace = cube.getYellowFace();
@@ -134,17 +171,19 @@ public class Algorithms {
         //First, we rotate the face in the corresponding direction
         rotateFaceCounterClockwise(rightFace);
         //Call rotateSlice method to rotate the slice.
-        rotateSlice(topFace, frontFace, bottomFace, backFace, 2, 5, 6, isPrime);
+        rotateVerticalSlice(topFace, frontFace, bottomFace, backFace, 2, 5, 6, isPrime);
     }
-    //Rest of rotations
-    public static void normalU(Cube cube) {
+    //This method performs a U movement
+    public static void normalU(Cube cube){
         rotateFaceClockwise(cube.getYellowFace());
-        rotateSlice(cube.getBlueFace(), cube.getRedFace(), cube.getGreenFace(), cube.getOrangeFace(), 1, 8, 5, false);
+        rotateHorizontalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getOrangeFace(), cube.getRedFace(), 1, 5, 8, false);
     }
+    //This method performs a U' movement
     public static void primeU(Cube cube){
         rotateFaceCounterClockwise(cube.getYellowFace());
-        rotateSlice(cube.getBlueFace(), cube.getRedFace(), cube.getGreenFace(), cube.getOrangeFace(), 1, 5, 8, true);
+        rotateHorizontalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getOrangeFace(), cube.getRedFace(), 1, 5, 8, true);
     }
+
     
     //This method performs a series of moves
     public static void performSequence(String sequenceIn, Cube cube){
