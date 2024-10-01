@@ -4,7 +4,7 @@ public class CubeDriver{
 
         Cube cube = new Cube();
 
-        Algorithms.performSequence("RUR'U'RUR'U'RUR'U'RUR'U'RUR'U'RUR'U'", cube);
+        Algorithms.performSequence("LU'L'U", cube);
         System.out.println("This is the cube after UR operation:\n---------------------");
         for(int i = 0; i < 6; i++){
             System.out.println(cube.getFace(i) + "\n");
