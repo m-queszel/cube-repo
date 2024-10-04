@@ -1,3 +1,4 @@
+package src;
 
 public class CubeDriver{
     public static void main(String[] args){
