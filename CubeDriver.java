@@ -4,7 +4,7 @@ public class CubeDriver{
 
         Cube cube = new Cube();
 
-        Algorithms.performSequence("FRF'R'FRF'R'FRF'R'FRF'R'FRF'R'FRF'R'", cube);
+        Movement.performSequence("BR'B'R", cube);
     
         System.out.println("This is the cube after UR operation:\n---------------------");
         for(int i = 0; i < 6; i++){
