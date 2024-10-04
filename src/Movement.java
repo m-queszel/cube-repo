@@ -383,13 +383,12 @@ public class Movement  {
     public static void normalB(Cube cube){
         rotateFaceClockwise(cube.getOrangeFace());
         rotateCoronalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getYellowFace(), cube.getWhiteFace(), 1, 5, 8, false, false);
+    //This method performs a B' movement
     }
     public static void primeB(Cube cube){
         rotateFaceCounterClockwise(cube.getOrangeFace());
         rotateCoronalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getYellowFace(), cube.getWhiteFace(), 1, 5, 8, true, false);
     }
-
-    
     //This method performs a series of moves
     public static void performSequence(String sequenceIn, Cube cube){
         char[] sequence = sequenceIn.toCharArray();
@@ -457,11 +456,6 @@ public class Movement  {
                 default:
                     System.out.println("Invalid operation: " + operation);
             }
-            // Debug output to check the current state of the cube
-            System.out.println("After operation " + operation + (isPrime ? "'" : "") + ":");
-            // Add a method to print the state of the cube
-            cube.printState();
-
 
             index++;
         }
