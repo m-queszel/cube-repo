@@ -5,16 +5,15 @@ public class CubeDriver{
 
         Cube cube = new Cube();
     
-        System.out.println("This is the cube before scramble:\n---------------------");
+        System.out.println("This is the cube:\n---------------------");
         for(int i = 0; i < 6; i++){
             System.out.println(cube.getFace(i) + "\n");
         }
+            
         Scramble.scrambleCube(cube);
-        System.out.println("This is the cube after scramble:\n---------------------");
+        System.out.println("This is the cube:\n---------------------");
         for(int i = 0; i < 6; i++){
             System.out.println(cube.getFace(i) + "\n");
         }
-
-       
     } 
 }

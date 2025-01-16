@@ -7,7 +7,6 @@ public class Face {
     public HashMap<Integer, String> edges;
     public HashMap<Integer, String> corners;
 
-
     public Face(char centerIn){
         this.center = centerIn;
         this.edges = new HashMap<>();
@@ -21,8 +20,8 @@ public class Face {
         corners.put(7, "" + centerIn + 7);
         corners.put(8, "" + centerIn + 8);
     }
-    
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Face Center: ").append(center).append("\n");
@@ -36,9 +35,4 @@ public class Face {
         }
         return sb.toString();
     }
-
-    
-
-
-
 }
