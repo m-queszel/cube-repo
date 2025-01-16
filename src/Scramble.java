@@ -1,7 +1,7 @@
 package src;
 import java.util.Random;
 public class Scramble {
-    //Current set of moves we have available
+    //Current set of available moves
     private static final String[] MOVES = { "R", "R'", "U", "U'", "L", "L'", "D", "D'", "F", "F'", "B", "B'"};
     private static String generateRandomSequence(int minLength, int maxLength){
         Random random = new Random();

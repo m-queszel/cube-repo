@@ -3,7 +3,6 @@ public class Movement  {
 
 //THESE ALGORITHMS ARE WRITTEN PRESUMING WE ARE HOLDING THE CUBE SUCH THAT RED IS FACING YOU WITH GREEN ON RIGHT.
 
-    //rotates a face 90 degrees clockwise
     public static void rotateFaceClockwise(Face face){
         String tempEdge1 = face.edges.get(1);
         String tempEdge2 = face.edges.get(2);
@@ -22,7 +21,6 @@ public class Movement  {
         face.corners.put(7, tempCorner6);
         face.corners.put(8, tempCorner7);
     }
-    //rotates a face 90 degrees counter clockwise
     public static void rotateFaceCounterClockwise(Face face){
         String tempEdge1 = face.edges.get(1);
         String tempEdge2 = face.edges.get(2);
@@ -41,8 +39,6 @@ public class Movement  {
         face.corners.put(7, tempCorner8);
         face.corners.put(8, tempCorner5);
     }
-
-    //rotates a slice either in the normal or prime vertical direction
     public static void rotateVerticalSlice(Face topFace, Face frontFace, Face bottomFace, Face backFace, int edgeIndex, int topCornerIndex, int bottomCornerIndex, boolean isPrimeRotation, boolean isOnRightSideOfCube){
 
         String tempEdgeTop = topFace.edges.get(edgeIndex);
@@ -54,7 +50,6 @@ public class Movement  {
         String tempCornerFrontBottom = frontFace.corners.get(bottomCornerIndex);
         String tempCornerBottomTop = bottomFace.corners.get(topCornerIndex);
         String tempCornerBottomBottom = bottomFace.corners.get(bottomCornerIndex);
-
         if(isPrimeRotation){  
             if(isOnRightSideOfCube){
                 topFace.edges.put(edgeIndex, backFace.edges.get(edgeIndex + 2));
@@ -94,7 +89,6 @@ public class Movement  {
                 backFace.corners.put(bottomCornerIndex - 2, tempCornerTopBottom);
             }
         }
-
         else{
             if(isOnRightSideOfCube){
                 topFace.edges.put(edgeIndex, frontFace.edges.get(edgeIndex));
@@ -136,7 +130,6 @@ public class Movement  {
             }
         }
     }
-    //rotates a slice either in the normal or prime horizontal direction
     public static void rotateHorizontalSlice(Face leftFace, Face rightFace, Face backFace, Face frontFace, int edgeIndex, int rightCornerIndex, int leftCornerIndex, boolean isPrimeRotation, boolean isOnTopSideOfCube){
         String tempEdgeFront = frontFace.edges.get(edgeIndex);
         String tempEdgeLeft = leftFace.edges.get(edgeIndex);
@@ -213,7 +206,6 @@ public class Movement  {
             }
         }
     }
-    //rotates a slice in the coronal plane
     public static void rotateCoronalSlice(Face leftFace, Face rightFace, Face topFace, Face bottomFace, int edgeIndex, int rightCornerIndex, int leftCornerIndex, boolean isPrimeRotation, boolean isOnFrontSideOfCube){
 
         if(isOnFrontSideOfCube){
@@ -306,7 +298,6 @@ public class Movement  {
             }
         }
     }
-    //performs an R movement.
     public static void normalR(Cube cube){
 
         Face rightFace = cube.getGreenFace();
@@ -321,10 +312,8 @@ public class Movement  {
 
         rotateVerticalSlice(topFace, frontFace, bottomFace, backFace, 2, 5, 6, isPrime, true);
     }
-    //performs an R' movement
     public static void primeR(Cube cube){
         
-
         Face rightFace = cube.getGreenFace();
         Face topFace = cube.getYellowFace();
         Face frontFace = cube.getRedFace();
@@ -337,58 +326,47 @@ public class Movement  {
 
         rotateVerticalSlice(topFace, frontFace, bottomFace, backFace, 2, 5, 6, isPrime, true);
     }
-    //performs a U movement
     public static void normalU(Cube cube){
         rotateFaceClockwise(cube.getYellowFace());
         rotateHorizontalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getOrangeFace(), cube.getRedFace(), 1, 5, 8, false, true);
     }
-    //performs a U' movement
     public static void primeU(Cube cube){
         rotateFaceCounterClockwise(cube.getYellowFace());
         rotateHorizontalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getOrangeFace(), cube.getRedFace(), 1, 5, 8, true, true);
     }
-    //performs an L movement
     public static void normalL(Cube cube){
         rotateFaceClockwise(cube.getBlueFace());
         rotateVerticalSlice(cube.getYellowFace(), cube.getRedFace(), cube.getWhiteFace(), cube.getOrangeFace(), 4, 8, 7, false, false);
     }
-    //performs an L' movement
     public static void primeL(Cube cube){
         rotateFaceCounterClockwise(cube.getBlueFace());
         rotateVerticalSlice(cube.getYellowFace(), cube.getRedFace(), cube.getWhiteFace(), cube.getOrangeFace(), 4, 8, 7, true, false);
     }
-    //performs a D movement
     public static void normalD(Cube cube){
         rotateFaceClockwise(cube.getWhiteFace());
         rotateHorizontalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getOrangeFace(), cube.getRedFace(), 3, 6, 7, false, false);
     }
-    //performs a D' movement
     public static void primeD(Cube cube){
         rotateFaceCounterClockwise(cube.getWhiteFace());
         rotateHorizontalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getOrangeFace(), cube.getRedFace(), 3, 6, 7, true, false);
     }
-    //F movement
     public static void normalF(Cube cube){
         rotateFaceClockwise(cube.getRedFace());
         rotateCoronalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getYellowFace(), cube.getWhiteFace(), 3, 6, 7, false, true);
 
     }
-    //F' movement
     public static void primeF(Cube cube){
         rotateFaceCounterClockwise(cube.getRedFace());
         rotateCoronalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getYellowFace(), cube.getWhiteFace(), 3, 6, 7, true, true);
     }
-    //B movement
     public static void normalB(Cube cube){
         rotateFaceClockwise(cube.getOrangeFace());
         rotateCoronalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getYellowFace(), cube.getWhiteFace(), 1, 5, 8, false, false);
-    //B' movement
     }
     public static void primeB(Cube cube){
         rotateFaceCounterClockwise(cube.getOrangeFace());
         rotateCoronalSlice(cube.getBlueFace(), cube.getGreenFace(), cube.getYellowFace(), cube.getWhiteFace(), 1, 5, 8, true, false);
     }
-    //This method performs a series of moves
     public static void performSequence(String sequenceIn, Cube cube){
         char[] sequence = sequenceIn.toCharArray();
         int index = 0;
